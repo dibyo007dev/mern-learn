@@ -18,11 +18,16 @@ CLient side setup :
     "start": "node server.js",                  // start the backend server
     "server": "nodemon server.js",              // starts and track the backend server
     
-    "client": "npm start --prefix client",        // starts the client server
+    "client": "npm start --prefix client",      // starts the client server
 
     "dev": "concurrently \" npm run server\" \"npm run client\""
 
-                                                  //  Starts both \"\"
+                                                 //  Starts both \"\"
     },
 
     this is the server side script to run both of them concurrently
+
+
+>> Clean-up the code and then add some styling components like bootstrap and reactstrap , react-transition-groups , PS : reactstrap helps us to use bootstrap classes as react components
+
+>> here uuid is a universal ID generator , we will first use a static ID the afterwards make a dynamic DB generated ID
