@@ -1,3 +1,3 @@
 module.exports = {
-    mongoURI: 'mongodb://mern-learn:mern-learn@ds133621.mlab.com:33621/mern-learn'
-}
+    mongoURI: 'mongodb://pranit123:pranit123@ds133621.mlab.com:33621/mern-learn'
+};
