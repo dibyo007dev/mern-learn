@@ -1,71 +1,82 @@
 import React, {Component} from 'react';
-import { Container, ListGroup, ListGroupItem, Button} from 'reactstrap';
-import { CSSTransition, TransitionGroup} from 'react-transition-group';
+
+import {
+  Grid,
+  ListGroup,
+  ListGroupItem,
+  Button,
+} from 'react-bootstrap';
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 import uuid from 'uuid';
 
+//import './styles.css';
+
 class ShoppingList extends Component {
+  state = {
+    items: [
+      { id: uuid(), text: 'Buy eggs' },
+      { id: uuid(), text: 'Pay bills' },
+      { id: uuid(), text: 'Invite friends over' },
+      { id: uuid(), text: 'Fix the TV' },
+    ],
+  };
 
-    state = {
-        items: [
-            { id: uuid(), name: 'Eggs'},
-            { id: uuid(), name: 'Milk'},
-            { id: uuid(), name: 'Steak'},
-            { id: uuid(), name: 'Water'}
-
-        ]
-    }
-
-    render() {
-
-        const { items } = this.state;
-
-        return(
-            <Container>
-                <Button 
-                    color="dark" 
-                    size="lg"
-                    style= {{
-                        marginBottom: '2rem'
-                    }}
+  render() {
+    const { items } = this.state;
+    return (
+      <Grid>
+        <ListGroup>
+          <TransitionGroup className="shopping-list">
+            {items.map(({ id, text }) => (
+              <CSSTransition
+                key={id}
+                timeout={500}
+                classNames="fade"
+              >
+                <ListGroupItem>
+                  <Button
+                    className="remove-btn"
+                    type="button"
+                    bsStyle="danger"
+                    bsSize="xs"
                     onClick={() => {
-                        const name = prompt('Enter Item');
-                        if(name) {
-                            this.setState( state => ({
-                                items: [...state.items, { id: uuid(), name}]
-                            }));
-                        }
-                    }}  
-                    >Add Item</Button>
-
-                <ListGroup>
-                    <TransitionGroup className="shopping-list">
-                        {
-                            items.map(({ id, name}) => (
-                                <CSSTransition key={id} timeout={500} >
-                                    <ListGroupItem>
-                                        <Button 
-                                        className="remove-btn"
-                                        color="danger"
-                                        size="sm"
-                                        
-                                        onClick={() => {
-                                            this.setState( state => ({
-                                                items: state.items.filter(item => item.id !== id )
-                                            }));
-                                        }}
-                                        >&times;</Button>
-                                    {"        "}
-                                    {name}
-                                    </ListGroupItem>
-                                </CSSTransition>
-                            ))
-                        }
-                    </TransitionGroup>
-                </ListGroup>
-
-            </Container>
-        );
-    }
+                      this.setState(state => ({
+                        items: state.items.filter(
+                          item => item.id !== id
+                        ),
+                      }));
+                    }}
+                  >
+                    &times;
+                  </Button> { " "}
+                  {text}
+                </ListGroupItem>
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        </ListGroup>
+        <Button
+          type="button"
+         // bsStyle="dark"
+          onClick={() => {
+            const text = prompt('Enter some text');
+            if (text) {
+              this.setState(state => ({
+                items: [
+                  ...state.items,
+                  { id: uuid(), text },
+                ],
+              }));
+            }
+          }}
+        >
+          Add Item
+        </Button>
+      </Grid>
+    );
+  }
 }
-
 export default ShoppingList;

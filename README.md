@@ -14,7 +14,7 @@ CLient side setup :
   >> Then we need to start the servers  1. react-server  and 2. Custom express side server  indivisually so what we do is we use
       "concurrently" which helps us to start both the servers in the same time and manage it.
 
-  >> "scripts": {
+    "scripts": {
     "start": "node server.js",                  // start the backend server
     "server": "nodemon server.js",              // starts and track the backend server
     
